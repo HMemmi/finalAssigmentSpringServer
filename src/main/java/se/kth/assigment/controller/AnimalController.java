@@ -1,5 +1,8 @@
 package se.kth.assigment.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,10 +25,48 @@ public class AnimalController {
 	 * This method triggered when we access this url http://localhost:8080/FinalAssigment/swimmers/{order}
 	 * @param order
 	 * @param swimmers
+	 * @throws InterruptedException 
 	 */
 	@RequestMapping(value="/swimmers/{order}" , method=RequestMethod.PUT)
 	public void getAnimals(@PathVariable(value="order") String order,
-			@RequestBody List<AnimalSwimmerDTO> swimmers){
+			@RequestBody List<AnimalSwimmerDTO> swimmers) throws InterruptedException{
+	  String command = "python /start.py";
+	  
+	  try {
+	      Process process = Runtime.getRuntime().exec(command);
+	   
+	      BufferedReader reader = new BufferedReader(
+	              new InputStreamReader(process.getInputStream()));
+	      String line;
+	      while ((line = reader.readLine()) != null) {
+	          System.out.println(line);
+	      }
+	   
+	      reader.close();
+	   
+	  } catch (IOException e) {
+	      e.printStackTrace();
+	  }
 		System.out.println("List of Swimmers Sorted by date order "+order+" \n"+swimmers);
+		
+		Thread.sleep(4000);
+		
+		 String command1 = "python /off.py";
+	      
+	      try {
+	          Process process = Runtime.getRuntime().exec(command);
+	       
+	          BufferedReader reader = new BufferedReader(
+	                  new InputStreamReader(process.getInputStream()));
+	          String line;
+	          while ((line = reader.readLine()) != null) {
+	              System.out.println(line);
+	          }
+	       
+	          reader.close();
+	       
+	      } catch (IOException e) {
+	          e.printStackTrace();
+	      }
 	}
 }
