@@ -30,20 +30,10 @@ public class AnimalController {
 	@RequestMapping(value="/swimmers/{order}" , method=RequestMethod.PUT)
 	public void getAnimals(@PathVariable(value="order") String order,
 			@RequestBody List<AnimalSwimmerDTO> swimmers) throws InterruptedException{
-	  String command = "python /start.py";
+	  String command = "python ~/dev/finalAssigmentSpringServer/src/main/resources/start.py";
 	  
 	  try {
 	      Process process = Runtime.getRuntime().exec(command);
-	   
-	      BufferedReader reader = new BufferedReader(
-	              new InputStreamReader(process.getInputStream()));
-	      String line;
-	      while ((line = reader.readLine()) != null) {
-	          System.out.println(line);
-	      }
-	   
-	      reader.close();
-	   
 	  } catch (IOException e) {
 	      e.printStackTrace();
 	  }
@@ -51,19 +41,11 @@ public class AnimalController {
 		
 		Thread.sleep(4000);
 		
-		 String command1 = "python /off.py";
+		 String command1 = "python ~/dev/finalAssigmentSpringServer/src/main/resources/off.py";
 	      
 	      try {
 	          Process process = Runtime.getRuntime().exec(command);
 	       
-	          BufferedReader reader = new BufferedReader(
-	                  new InputStreamReader(process.getInputStream()));
-	          String line;
-	          while ((line = reader.readLine()) != null) {
-	              System.out.println(line);
-	          }
-	       
-	          reader.close();
 	       
 	      } catch (IOException e) {
 	          e.printStackTrace();
