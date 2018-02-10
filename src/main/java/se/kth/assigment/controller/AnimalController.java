@@ -30,7 +30,7 @@ public class AnimalController {
 	@RequestMapping(value="/swimmers/{order}" , method=RequestMethod.PUT)
 	public void getAnimals(@PathVariable(value="order") String order,
 			@RequestBody List<AnimalSwimmerDTO> swimmers) throws InterruptedException{
-	  String command = "python ~/dev/finalAssigmentSpringServer/src/main/resources/start.py";
+	  String command = "python start.py";
 	  
 	  try {
 	      Process process = Runtime.getRuntime().exec(command);
@@ -41,7 +41,7 @@ public class AnimalController {
 		
 		Thread.sleep(4000);
 		
-		 String command1 = "python ~/dev/finalAssigmentSpringServer/src/main/resources/off.py";
+		 String command1 = "python off.py";
 	      
 	      try {
 	          Process process = Runtime.getRuntime().exec(command);
